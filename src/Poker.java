@@ -1,6 +1,6 @@
 import java.util.*;
 
-/// second commit testing!!
+
 
 public class Poker implements PokerEngine {
 	private ArrayList<Card> gameDeck = new ArrayList<Card>();
@@ -51,7 +51,7 @@ public class Poker implements PokerEngine {
 		playerDeck = new ArrayList<Card>();
 		opponentDeck = new ArrayList<Card>();
 		this.createAndShuffleGameDeck();
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 5; i++) {
 			playerDeck.add(gameDeck.remove(0));
 			opponentDeck.add(gameDeck.remove(0));
 		}
@@ -91,6 +91,20 @@ public class Poker implements PokerEngine {
 		}
 
 	}
+	
+	public void swap(int n, Card[] cardsToBeSwapped) {
+		for (int i = 0; i < cardsToBeSwapped.length; i++) {
+			gameDeck.add(cardsToBeSwapped[i]);
+			playerDeck.remove(cardsToBeSwapped[i]);
+		}
+		
+		for (int i = 0; i < n; i++) {
+			playerDeck.add(gameDeck.remove(0));
+		}
+		
+	}
+	
+	
 
 	public void setBetAmount(int amount) {
 		betAmount = amount;

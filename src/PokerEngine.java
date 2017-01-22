@@ -79,6 +79,13 @@ public interface PokerEngine {
 	 */
 	public void playerCut(int n);
 	
+	/** Sends n cards to the bottom of the game deck, and receive
+	 *  n cards from the top of the game deck.
+	 * @param n. number of cards being swapped from hand.
+	 */
+	public void swap(int n, Card[] cardsToBeSwapped);
+	
+	
 	
 	/** 
 	 * Updates the bet amount to the provided value 
