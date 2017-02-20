@@ -1,7 +1,5 @@
 import java.util.*;
 
-
-
 public class Poker implements PokerEngine {
 	private ArrayList<Card> gameDeck = new ArrayList<Card>();
 	private ArrayList<Card> playerDeck = new ArrayList<Card>();
@@ -76,13 +74,57 @@ public class Poker implements PokerEngine {
 	}
 
 	public int getDealerCardsEvaluation() {
-		// TODO Auto-generated method stub
-		return 0;
+		int answer = 0;
+		boolean jokerFound = false;
+
+		HashMap<String, Integer> hash = new HashMap<String, Integer>();
+		for (Card c : opponentDeck) {
+			if (hash.get(c) == null) {
+				hash.put(c.getName(), 0);
+			}
+			hash.put(c.getName(), hash.get(c) + 1);
+		}
+
+		for (String s : hash.keySet()) {
+			if (hash.get(s) > answer) {
+				answer = hash.get(s);
+			}
+			if (s.equals("Joker")) {
+				jokerFound = true;
+			}
+		}
+		if (jokerFound) {
+			return answer + 1;
+		} else {
+			return answer;
+		}
 	}
 
 	public int getPlayerCardsEvaluation() {
-		// TODO Auto-generated method stub
-		return 0;
+		int answer = 0;
+		boolean jokerFound = false;
+
+		HashMap<String, Integer> hash = new HashMap<String, Integer>();
+		for (Card c : playerDeck) {
+			if (hash.get(c) == null) {
+				hash.put(c.getName(), 0);
+			}
+			hash.put(c.getName(), hash.get(c) + 1);
+		}
+
+		for (String s : hash.keySet()) {
+			if (hash.get(s) > answer) {
+				answer = hash.get(s);
+			}
+			if (s.equals("Joker")) {
+				jokerFound = true;
+			}
+		}
+		if (jokerFound) {
+			return answer + 1;
+		} else {
+			return answer;
+		}
 	}
 
 	public void playerCut(int n) {
@@ -91,20 +133,18 @@ public class Poker implements PokerEngine {
 		}
 
 	}
-	
+
 	public void swap(int n, Card[] cardsToBeSwapped) {
 		for (int i = 0; i < cardsToBeSwapped.length; i++) {
 			gameDeck.add(cardsToBeSwapped[i]);
 			playerDeck.remove(cardsToBeSwapped[i]);
 		}
-		
+
 		for (int i = 0; i < n; i++) {
 			playerDeck.add(gameDeck.remove(0));
 		}
-		
+
 	}
-	
-	
 
 	public void setBetAmount(int amount) {
 		betAmount = amount;
